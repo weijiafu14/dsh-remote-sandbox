@@ -1,0 +1,31 @@
+{
+  "name": "dsh-remote-sidecar",
+  "version": "0.1.0",
+  "description": "In-sandbox executor for the dsh remote-sandbox suite: a single pure-JS bundle that serves fs and process primitives over the sidecar WebSocket protocol.",
+  "type": "module",
+  "license": "MIT",
+  "author": "weijiafu8",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
+  "files": ["lib", "dist", "src"],
+  "scripts": {
+    "build": "node build.mjs && tsc -b"
+  },
+  "dependencies": {
+    "dsh-remote-protocol": "workspace:*",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "@types/ws": "^8.5.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.8"
+  }
+}

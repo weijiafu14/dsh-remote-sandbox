@@ -1,0 +1,54 @@
+{
+  "name": "dsh-fs-remote",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness ctx.fs provider backed by the remote-sandbox sidecar: every filesystem method is one round trip, with atomic writes, version guards, and bounded reads.",
+  "type": "module",
+  "license": "MIT",
+  "author": "weijiafu8",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "filesystem",
+    "sandbox"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    }
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "dsh-remote-protocol": "workspace:*"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-fs": ">=0.0.1-rc.1",
+    "@deepseek-ai/dsh-sandbox": ">=0.0.1-rc.1",
+    "@deepseek-ai/dsh-invariants": ">=0.0.1-rc.1",
+    "dsh-sandbox-keeper": "workspace:^"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "workspace:*",
+    "@deepseek-ai/dsh-fs": "workspace:*",
+    "@deepseek-ai/dsh-sandbox": "workspace:*",
+    "@deepseek-ai/dsh-invariants": "workspace:*",
+    "dsh-sandbox-keeper": "workspace:*",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.8",
+    "dsh-remote-sidecar": "workspace:*"
+  }
+}

@@ -1,0 +1,6 @@
+# Standalone workspace manifest. When this repo is developed inside the
+# deepseek-harness source tree, the harness workspace owns resolution and this
+# file is dormant (rename to pnpm-workspace.yaml only when the repo stands
+# alone, and switch @deepseek-ai/dsh-* devDependencies to real npm versions).
+packages:
+  - packages/*

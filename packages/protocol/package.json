@@ -1,0 +1,20 @@
+{
+  "name": "dsh-remote-protocol",
+  "version": "0.1.0",
+  "description": "Wire protocol shared by the dsh remote-sandbox sidecar and its host-side providers: framed request/response plus streaming chunks over one WebSocket.",
+  "type": "module",
+  "license": "MIT",
+  "author": "weijiafu8",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
+  "files": ["lib", "src"],
+  "scripts": {
+    "build": "tsc -b"
+  }
+}

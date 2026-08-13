@@ -1,0 +1,26 @@
+# dsh-remote-sandbox bundle: layer over dsh-base to move the execution world
+# into an E2B sandbox managed by the keeper. The local subprocess and
+# sandboxed-fs providers are disabled and replaced by the keeper plus the
+# remote fs/subprocess providers; the bash, terminal, and LSP consumers in
+# dsh-base compose above them unchanged because they only use ctx.fs and
+# ctx.subprocess.
+#
+# Set E2B_API_KEY in the environment. The keeper reads it and never forwards it
+# into the sandbox. cwd is the sandbox workspace; hostWorkspace is the local
+# project synced in at open and out on request/teardown.
+- id: subprocess
+  name: '@deepseek-ai/dsh-subprocess-local'
+  disabled: true
+- id: fs-sandbox
+  name: '@deepseek-ai/dsh-fs-sandbox'
+  disabled: true
+- insert:
+    - id: sandbox-keeper
+      name: dsh-sandbox-keeper
+      config:
+        cwd: /home/user/workspace
+        hostWorkspace: !!js process.cwd()
+    - id: subprocess-remote
+      name: dsh-subprocess-remote
+    - id: fs-remote
+      name: dsh-fs-remote
