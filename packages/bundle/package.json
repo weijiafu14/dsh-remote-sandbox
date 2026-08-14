@@ -13,8 +13,8 @@
     }
   },
   "dependencies": {
-    "dsh-sandbox-keeper": "workspace:^",
-    "dsh-fs-remote": "workspace:^",
-    "dsh-subprocess-remote": "workspace:^"
+    "dsh-sandbox-keeper": "^0.1.0",
+    "dsh-fs-remote": "^0.1.0",
+    "dsh-subprocess-remote": "^0.1.0"
   }
 }
