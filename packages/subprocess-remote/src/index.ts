@@ -51,6 +51,12 @@ export default class RemoteSubprocessRuntime extends SubprocessRuntime {
     return new RemoteHandle(this.rpc(spec.signal), spec)
   }
 
+  // TODO(pty-in-sidecar): experimental, not yet test-covered. E2B's pty API
+  // exposes no foreground-group or input-wait facts, so inspectForeground is a
+  // best-effort stub. Planned: allocate the pty in the sidecar via a prebuilt
+  // node-pty so foreground detection (tcgetpgrp) and input-wait become real and
+  // the pty rides the same sidecar channel as fs/spawn. Non-interactive agent
+  // work (the remote-sandbox target) never reaches this path.
   async spawnTerminal(spec: SubprocessTerminalSpawnSpec): Promise<SubprocessTerminalHandle> {
     const remoteSandbox = (this.ctx as Context).remoteSandbox
     const env = { ...scrubbedParentEnv(), ...spec.env }
