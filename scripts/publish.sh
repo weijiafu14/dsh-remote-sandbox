@@ -14,7 +14,7 @@
 # Alternatively, set a bypass-2FA automation token and omit the code:
 #   npm config set //registry.npmjs.org/:_authToken=<token>
 #   bash scripts/publish.sh
-set -euo pipefail
+set -eo pipefail
 cd "$(dirname "$0")/.."
 
 if [ ! -f packages/protocol/lib/index.js ] || [ ! -f packages/sidecar/dist/sidecar.cjs ]; then
@@ -23,17 +23,14 @@ if [ ! -f packages/protocol/lib/index.js ] || [ ! -f packages/sidecar/dist/sidec
   exit 1
 fi
 
-OTP_ARG=()
-if [ "${1:-}" != "" ]; then
-  OTP_ARG=(--otp="$1")
+COMMON="-r --filter ./packages/* publish --no-git-checks --access public --registry=https://registry.npmjs.org"
+
+if [ -n "${1:-}" ]; then
   echo "publishing with the provided OTP (topological order)..."
+  pnpm $COMMON --otp="$1"
 else
   echo "publishing (no OTP given — relying on an automation token)..."
+  pnpm $COMMON
 fi
-
-pnpm -r --filter './packages/*' publish \
-  --no-git-checks --access public \
-  --registry=https://registry.npmjs.org \
-  "${OTP_ARG[@]}"
 
 echo "done. verify: npm view dsh-remote-sandbox version"
